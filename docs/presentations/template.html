@@ -6,53 +6,94 @@
   <title>Codex Presentation Template</title>
   <style>
     :root {
-      --bg: #0b1021;
-      --fg: #f7f8fb;
-      --muted: #a0aec0;
-      --accent: #4de1ff;
-      --accent-2: #ff8ad0;
-      --card: rgba(255, 255, 255, 0.06);
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --accent: #ffc800;
+      --muted: #666666;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--fg);
+      color: var(--text);
     }
 
     .deck {
       height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 0.75rem 1.25rem;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    header .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    header .progress {
+      flex: 1;
+      height: 6px;
+      background: #e5e5e5;
+      border-radius: 999px;
       overflow: hidden;
-      position: relative;
-      isolation: isolate;
+    }
+
+    header .progress span {
+      display: block;
+      height: 100%;
+      background: var(--accent);
+      width: 0;
+      transition: width 150ms ease-in-out;
     }
 
     main {
-      height: 100%;
+      flex: 1;
       position: relative;
+      overflow: hidden;
     }
 
     .slide {
       position: absolute;
       inset: 0;
-      padding: 6vh 8vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.75rem;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(77, 225, 255, 0.16), transparent 30%),
-        radial-gradient(circle at 82% 18%, rgba(255, 138, 208, 0.18), transparent 32%),
-        radial-gradient(circle at 45% 80%, rgba(77, 225, 255, 0.08), transparent 40%),
-        var(--bg);
-      transition: opacity 140ms ease-out, transform 140ms ease-out;
+      padding: 2.5rem 3rem;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      margin: 1.5rem auto;
+      width: calc(100% - 3rem);
+      height: calc(100% - 3rem);
+      border-radius: 12px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1.5rem;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(26px);
+      transform: translateY(24px);
+      transition: opacity 120ms ease-out, transform 120ms ease-out;
     }
 
     .slide.active {
@@ -61,79 +102,120 @@
       transform: translateY(0);
     }
 
-    .slide h1 {
+    .slide h1, .slide h2, .slide h3 {
       margin: 0;
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+
+    .slide h1 {
+      font-size: 2.4rem;
     }
 
     .slide h2 {
-      margin: 0.15rem 0 0;
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-size: 1.6rem;
       color: var(--muted);
       font-weight: 600;
     }
 
     .slide p, .slide ul, .slide ol {
+      color: #1f2937;
+      line-height: 1.6;
       margin: 0;
-      color: var(--fg);
-      line-height: 1.7;
-      max-width: 900px;
     }
 
     .pill {
       display: inline-block;
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-      color: #0b1021;
-      padding: 0.35rem 0.85rem;
+      background: var(--accent);
+      color: #111;
+      padding: 0.35rem 0.75rem;
       border-radius: 999px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       text-transform: uppercase;
-      font-size: 0.85rem;
-      width: fit-content;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+      font-size: 0.8rem;
     }
 
     .grid-two {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1rem;
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.2rem 1.35rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
-      backdrop-filter: blur(6px);
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 1.25rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
     }
 
-    .card h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.15rem;
-      letter-spacing: 0.01em;
+    .card.highlight {
+      background: #fef08a;
+      color: #111827;
     }
 
-    .card ul, .card ol { color: var(--fg); }
+    footer {
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
-    @media (max-width: 800px) {
-      .slide { padding: 5vh 6vw; }
-      .grid-two { grid-template-columns: 1fr; }
+    .hint {
+      display: inline-flex;
+      gap: 0.4rem;
+      align-items: center;
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      background: #e2e8f0;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .slide {
+        padding: 1.5rem;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+      }
+
+      .slide h1 {
+        font-size: 1.8rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header .progress {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="deck" data-title="Codex Presentation Template">
+    <header>
+      <div class="meta">
+        <span class="pill">Demo</span>
+        <span class="title">Codex Presentation Template</span>
+      </div>
+      <div class="progress" aria-hidden="true"><span></span></div>
+      <div class="meta">Use ← / → or Space / Shift+Space</div>
+    </header>
+
     <main>
       <!-- Duplicate the slides below to create your presentation. Each
            <section class="slide"> is a single slide. Update the deck title
-           in the .deck data-title attribute to reflect the presentation name. -->
+           in the .deck data-title attribute and the header pill to reflect
+           the presentation name. -->
 
       <section class="slide active">
-        <p class="pill">Welcome</p>
         <div>
+          <p class="pill">Welcome</p>
           <h1>Title of Your Presentation</h1>
           <h2>Optional subtitle goes right here</h2>
         </div>
@@ -141,12 +223,12 @@
           <div class="card">
             <h3>What this template offers</h3>
             <ul>
-              <li>Single-file HTML designed to feel like fullscreen slides.</li>
-              <li>Keyboard, click, and touch controls with no on-slide chrome.</li>
-              <li>Clean, atmospheric styling you can iterate over time.</li>
+              <li>Single-file HTML with inline styling and navigation.</li>
+              <li>Keyboard, click, and touch controls.</li>
+              <li>Clean, neutral layout you can iterate over time.</li>
             </ul>
           </div>
-          <div class="card">
+          <div class="card highlight">
             <h3>How to use it</h3>
             <ol>
               <li>Copy this file and rename it.</li>
@@ -158,17 +240,16 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Structure</p>
         <div>
+          <p class="pill">Structure</p>
           <h1>Slide Layout Helpers</h1>
-          <p>Mix headline blocks with grid layouts to balance narrative and detail.</p>
         </div>
         <div class="grid-two">
           <div class="card">
             <h3>Reusable Classes</h3>
             <ul>
               <li><code>.grid-two</code> for two-column layouts.</li>
-              <li><code>.card</code> for contained content blocks.</li>
+              <li><code>.card</code> and <code>.card.highlight</code> for emphasis.</li>
               <li><code>.pill</code> for compact labels.</li>
             </ul>
           </div>
@@ -176,7 +257,7 @@
             <h3>Design Tips</h3>
             <ul>
               <li>Use short headlines; keep bullets concise.</li>
-              <li>Blend accent gradients sparingly for emphasis.</li>
+              <li>Mix muted and accent colors for hierarchy.</li>
               <li>Keep slides focused on one concept.</li>
             </ul>
           </div>
@@ -184,37 +265,51 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Next Steps</p>
         <div>
+          <p class="pill">Next Steps</p>
           <h1>Duplicate & Share</h1>
-          <p>After customizing, link your new file from the GitHub Pages index. Keep slides self-contained by embedding assets alongside each deck.</p>
         </div>
-        <div class="card">
-          <h3>Navigation</h3>
+        <div>
+          <p>After customizing, link your new file from the GitHub Pages index. The navigation supports:</p>
           <ul>
             <li><strong>Keyboard:</strong> ← / →, Space, or Shift+Space</li>
             <li><strong>Click:</strong> click the left or right half of the slide</li>
             <li><strong>Touch:</strong> swipe left or right on mobile</li>
           </ul>
+          <p>To keep everything self-contained, embed images as base64 or host them alongside the file within the repository.</p>
         </div>
       </section>
     </main>
+
+    <footer>
+      <div class="hint">
+        <span>←</span><span>→</span>
+        <span>Navigate</span>
+      </div>
+      <div class="meta">Slide <span class="current">1</span> / <span class="total">3</span></div>
+    </footer>
   </div>
 
   <script>
     const deck = document.querySelector('.deck');
     const slides = Array.from(document.querySelectorAll('.slide'));
-    let index = 0;
+    const progress = document.querySelector('.progress span');
+    const currentEl = document.querySelector('.current');
+    const totalEl = document.querySelector('.total');
+    const titleEl = document.querySelector('.title');
 
-    if (deck?.dataset.title) {
-      document.title = deck.dataset.title;
-    }
+    let index = 0;
+    totalEl.textContent = slides.length;
+    titleEl.textContent = deck?.dataset.title || titleEl.textContent;
 
     const activate = (nextIndex) => {
       index = Math.max(0, Math.min(nextIndex, slides.length - 1));
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
       });
+      const pct = ((index + 1) / slides.length) * 100;
+      progress.style.width = `${pct}%`;
+      currentEl.textContent = index + 1;
     };
 
     const goNext = () => activate(index + 1);
@@ -222,11 +317,11 @@
 
     const handleKey = (event) => {
       const { key, shiftKey } = event;
-      if (["ArrowRight", "ArrowDown", " "].includes(key)) {
+      if (['ArrowRight', 'ArrowDown', ' '].includes(key)) {
         event.preventDefault();
         return shiftKey ? goPrev() : goNext();
       }
-      if (["ArrowLeft", "ArrowUp"].includes(key)) {
+      if (['ArrowLeft', 'ArrowUp'].includes(key)) {
         event.preventDefault();
         return goPrev();
       }

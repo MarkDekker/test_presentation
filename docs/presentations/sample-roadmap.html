@@ -6,14 +6,12 @@
   <title>Performance & Roadmap Showcase</title>
   <style>
     :root {
-      --bg: #0b1021;
-      --fg: #f7f8fb;
-      --muted: #9aa4b5;
-      --accent: #4de1ff;
-      --accent-2: #ff8ad0;
-      --card: rgba(255, 255, 255, 0.06);
-      --card-strong: linear-gradient(135deg, rgba(77, 225, 255, 0.2), rgba(255, 138, 208, 0.16));
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --text: #111827;
+      --accent: #ffce00;
+      --muted: #4b5563;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
       font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
     }
 
@@ -22,119 +20,118 @@
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--fg);
+      color: var(--text);
     }
 
-    .deck {
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-      isolation: isolate;
+    .deck { height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+      padding: 0.85rem 1.5rem;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
     }
 
-    main { height: 100%; position: relative; }
+    header .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    header .progress { flex: 1; height: 6px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
+    header .progress span { display: block; height: 100%; background: var(--accent); width: 0; transition: width 150ms ease-in-out; }
+
+    main { flex: 1; position: relative; overflow: hidden; }
 
     .slide {
       position: absolute;
       inset: 0;
-      padding: 6vh 8vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.6rem;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(77, 225, 255, 0.14), transparent 30%),
-        radial-gradient(circle at 82% 12%, rgba(255, 138, 208, 0.18), transparent 32%),
-        radial-gradient(circle at 50% 82%, rgba(77, 225, 255, 0.08), transparent 40%),
-        var(--bg);
-      transition: opacity 140ms ease-out, transform 140ms ease-out;
+      padding: 2.6rem 3.2rem;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      margin: 1.4rem auto;
+      width: calc(100% - 3rem);
+      height: calc(100% - 3rem);
+      border-radius: 14px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1.4rem;
       opacity: 0;
       pointer-events: none;
       transform: translateY(26px);
+      transition: opacity 140ms ease-out, transform 140ms ease-out;
     }
 
     .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-    .slide h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      letter-spacing: -0.02em;
-    }
+    .slide h1, .slide h2, .slide h3 { margin: 0; }
+    .slide h1 { font-size: 2.35rem; color: #0f172a; }
+    .slide h2 { font-size: 1.5rem; color: var(--muted); font-weight: 600; }
 
-    .slide h2 {
-      margin: 0.25rem 0 0;
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      color: var(--muted);
-      font-weight: 600;
-    }
+    .slide p, .slide ul, .slide ol { color: #1f2937; line-height: 1.65; margin: 0; }
 
-    .slide p, .slide ul, .slide ol {
-      margin: 0;
-      color: var(--fg);
-      line-height: 1.7;
-      max-width: 950px;
-    }
+    .pill { display: inline-block; background: var(--accent); color: #0f172a; padding: 0.35rem 0.8rem; border-radius: 999px; font-weight: 800; letter-spacing: 0.01em; text-transform: uppercase; font-size: 0.8rem; }
 
-    .pill {
-      display: inline-block;
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-      color: #0b1021;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      width: fit-content;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .grid-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .grid-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
     .grid-three { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.25rem 1.4rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
-      backdrop-filter: blur(6px);
-    }
-
-    .card h3 { margin: 0 0 0.4rem; font-size: 1.1rem; letter-spacing: 0.01em; }
-    .card ul, .card ol { color: var(--fg); }
-
-    .card.highlight { background: var(--card-strong); border-color: rgba(255, 255, 255, 0.25); }
-    .card.light { background: rgba(255, 255, 255, 0.08); }
+    .card { background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: 12px; box-shadow: var(--shadow); }
+    .card.highlight { background: #fef08a; color: #111827; }
+    .card.light { background: #f8fafc; color: #0f172a; }
 
     .stat {
       display: inline-flex;
       align-items: baseline;
-      gap: 0.4rem;
+      gap: 0.35rem;
       font-size: 2.2rem;
       font-weight: 800;
-      color: #fefefe;
+      color: #0f172a;
     }
 
-    .stat small { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.03em; }
+    .stat small { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.03em; }
 
-    .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.9rem; }
-    .timeline .lane { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem; display: flex; flex-direction: column; gap: 0.55rem; }
-    .timeline .lane h3 { margin: 0; font-size: 0.95rem; color: var(--fg); text-transform: uppercase; letter-spacing: 0.03em; }
-    .timeline .item { background: rgba(255, 255, 255, 0.09); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px; padding: 0.6rem 0.7rem; font-weight: 700; color: #fefefe; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); }
+    .timeline { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; }
+    .timeline .lane { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 0.75rem; min-height: 160px; display: flex; flex-direction: column; gap: 0.5rem; }
+    .timeline .lane h3 { margin: 0; font-size: 0.95rem; color: #0f172a; text-transform: uppercase; letter-spacing: 0.02em; }
+    .timeline .item { background: #fff7d6; border: 1px solid #facc15; border-radius: 10px; padding: 0.65rem 0.7rem; font-weight: 700; color: #92400e; box-shadow: var(--shadow); }
 
-    @media (max-width: 800px) {
-      .slide { padding: 5vh 6vw; }
-      .grid-two, .grid-three { grid-template-columns: 1fr; }
+    footer { padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.9rem; }
+    .hint { display: inline-flex; gap: 0.4rem; align-items: center; padding: 0.35rem 0.75rem; border-radius: 8px; background: #e2e8f0; color: #0f172a; font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .slide { padding: 1.5rem; width: calc(100% - 2rem); height: calc(100% - 2rem); }
+      .slide h1 { font-size: 1.9rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      header .progress { width: 100%; }
     }
   </style>
 </head>
 <body>
   <div class="deck" data-title="Performance & Roadmap Showcase">
+    <header>
+      <div class="meta">
+        <span class="pill">Showcase</span>
+        <span class="title">Performance & Roadmap Showcase</span>
+      </div>
+      <div class="progress" aria-hidden="true"><span></span></div>
+      <div class="meta">Use ← / → or Space / Shift+Space</div>
+    </header>
+
     <main>
       <section class="slide active">
-        <p class="pill">Long-term View</p>
         <div>
+          <p class="pill">Long-term View</p>
           <h1>Long-term Roadmap</h1>
           <h2>Lead magnet, MIA upgrades, and efficiency milestones</h2>
         </div>
@@ -167,8 +164,8 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Lead Driver</p>
         <div>
+          <p class="pill">Lead Driver</p>
           <h1>The Recommender</h1>
           <h2>Embedded across surfaces to drive incremental leads</h2>
         </div>
@@ -190,8 +187,8 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Distribution</p>
         <div>
+          <p class="pill">Distribution</p>
           <h1>Focus on the Tail</h1>
           <h2>Even coverage increases perceived fairness and value</h2>
         </div>
@@ -208,8 +205,8 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Performance</p>
         <div>
+          <p class="pill">Performance</p>
           <h1>Strong Results After Launch</h1>
           <h2>Early data points to significant uplift</h2>
         </div>
@@ -223,7 +220,7 @@
             <p>Measured in AB test for target.</p>
           </div>
           <div class="card">
-            <div class="stat" style="color: #fefefe;">1.5x</div>
+            <div class="stat" style="color: #f8fafc;">1.5x</div>
             <p>Lead uplift for T40 compared to baseline.</p>
           </div>
         </div>
@@ -231,8 +228,8 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Product</p>
         <div>
+          <p class="pill">Product</p>
           <h1>MIA T40 vs MIA T50</h1>
           <h2>Different surfaces, same goal: more qualified leads</h2>
         </div>
@@ -257,8 +254,8 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Approach</p>
         <div>
+          <p class="pill">Approach</p>
           <h1>Balance Value with Cost</h1>
         </div>
         <div class="grid-two">
@@ -282,8 +279,8 @@
       </section>
 
       <section class="slide">
-        <p class="pill">Clean Slate</p>
         <div>
+          <p class="pill">Clean Slate</p>
           <h1>Performance vs Spend</h1>
           <h2>Simple pricing aligned with value</h2>
         </div>
@@ -304,22 +301,36 @@
         </div>
       </section>
     </main>
+
+    <footer>
+      <div class="hint">
+        <span>←</span><span>→</span>
+        <span>Navigate</span>
+      </div>
+      <div class="meta">Slide <span class="current">1</span> / <span class="total">7</span></div>
+    </footer>
   </div>
 
   <script>
     const deck = document.querySelector('.deck');
     const slides = Array.from(document.querySelectorAll('.slide'));
-    let index = 0;
+    const progress = document.querySelector('.progress span');
+    const currentEl = document.querySelector('.current');
+    const totalEl = document.querySelector('.total');
+    const titleEl = document.querySelector('.title');
 
-    if (deck?.dataset.title) {
-      document.title = deck.dataset.title;
-    }
+    let index = 0;
+    totalEl.textContent = slides.length;
+    titleEl.textContent = deck?.dataset.title || titleEl.textContent;
 
     const activate = (nextIndex) => {
       index = Math.max(0, Math.min(nextIndex, slides.length - 1));
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
       });
+      const pct = ((index + 1) / slides.length) * 100;
+      progress.style.width = `${pct}%`;
+      currentEl.textContent = index + 1;
     };
 
     const goNext = () => activate(index + 1);
@@ -327,11 +338,11 @@
 
     const handleKey = (event) => {
       const { key, shiftKey } = event;
-      if (["ArrowRight", "ArrowDown", " "].includes(key)) {
+      if (['ArrowRight', 'ArrowDown', ' '].includes(key)) {
         event.preventDefault();
         return shiftKey ? goPrev() : goNext();
       }
-      if (["ArrowLeft", "ArrowUp"].includes(key)) {
+      if (['ArrowLeft', 'ArrowUp'].includes(key)) {
         event.preventDefault();
         return goPrev();
       }
