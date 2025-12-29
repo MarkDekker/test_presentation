@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance & Roadmap Showcase</title>
+  <style>
+    :root {
+      --bg: #0b1021;
+      --fg: #f7f8fb;
+      --muted: #9aa4b5;
+      --accent: #4de1ff;
+      --accent-2: #ff8ad0;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: linear-gradient(135deg, rgba(77, 225, 255, 0.2), rgba(255, 138, 208, 0.16));
+      --border: rgba(255, 255, 255, 0.08);
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .deck {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    main { height: 100%; position: relative; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 6vh 8vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.6rem;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(77, 225, 255, 0.14), transparent 30%),
+        radial-gradient(circle at 82% 12%, rgba(255, 138, 208, 0.18), transparent 32%),
+        radial-gradient(circle at 50% 82%, rgba(77, 225, 255, 0.08), transparent 40%),
+        var(--bg);
+      transition: opacity 140ms ease-out, transform 140ms ease-out;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(26px);
+    }
+
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .slide h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      letter-spacing: -0.02em;
+    }
+
+    .slide h2 {
+      margin: 0.25rem 0 0;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .slide p, .slide ul, .slide ol {
+      margin: 0;
+      color: var(--fg);
+      line-height: 1.7;
+      max-width: 950px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #0b1021;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      width: fit-content;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .grid-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .grid-three { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.4rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(6px);
+    }
+
+    .card h3 { margin: 0 0 0.4rem; font-size: 1.1rem; letter-spacing: 0.01em; }
+    .card ul, .card ol { color: var(--fg); }
+
+    .card.highlight { background: var(--card-strong); border-color: rgba(255, 255, 255, 0.25); }
+    .card.light { background: rgba(255, 255, 255, 0.08); }
+
+    .stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fefefe;
+    }
+
+    .stat small { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.03em; }
+
+    .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.9rem; }
+    .timeline .lane { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem; display: flex; flex-direction: column; gap: 0.55rem; }
+    .timeline .lane h3 { margin: 0; font-size: 0.95rem; color: var(--fg); text-transform: uppercase; letter-spacing: 0.03em; }
+    .timeline .item { background: rgba(255, 255, 255, 0.09); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px; padding: 0.6rem 0.7rem; font-weight: 700; color: #fefefe; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); }
+
+    @media (max-width: 800px) {
+      .slide { padding: 5vh 6vw; }
+      .grid-two, .grid-three { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" data-title="Performance & Roadmap Showcase">
+    <main>
+      <section class="slide active">
+        <p class="pill">Long-term View</p>
+        <div>
+          <h1>Long-term Roadmap</h1>
+          <h2>Lead magnet, MIA upgrades, and efficiency milestones</h2>
+        </div>
+        <div class="timeline">
+          <div class="lane">
+            <h3>H1 2023</h3>
+            <div class="item">Major surfaces scaled</div>
+          </div>
+          <div class="lane">
+            <h3>H2 2023</h3>
+            <div class="item">Relevance & revenue optimization</div>
+            <div class="item">More surfaces scaled</div>
+          </div>
+          <div class="lane">
+            <h3>H1 2024</h3>
+            <div class="item">MIA T50 implementations</div>
+            <div class="item">Target list tooling</div>
+          </div>
+          <div class="lane">
+            <h3>H2 2024</h3>
+            <div class="item">Launch T50 in DE, BE, IT</div>
+            <div class="item">Launch T30 in AT, NL</div>
+          </div>
+          <div class="lane">
+            <h3>H1 2025</h3>
+            <div class="item">Online uplift management caps</div>
+            <div class="item">CPC product for Lemons*</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Lead Driver</p>
+        <div>
+          <h1>The Recommender</h1>
+          <h2>Embedded across surfaces to drive incremental leads</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card light">
+            <h3>Coverage</h3>
+            <ul>
+              <li>List page modules</li>
+              <li>Detail pages and apps</li>
+              <li>Email CRM and lead confirmations</li>
+            </ul>
+          </div>
+          <div class="card highlight">
+            <div class="stat">~20% <small>of leads</small></div>
+            <p>The recommender powers roughly a fifth of all leads across key surfaces, making it a critical lever for distribution.</p>
+          </div>
+        </div>
+        <p style="color: var(--muted); margin-top: 1rem;">* Data taken from Google Analytics Web for June 2021</p>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Distribution</p>
+        <div>
+          <h1>Focus on the Tail</h1>
+          <h2>Even coverage increases perceived fairness and value</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Opportunity</h3>
+            <p>Listings with few views feel invisible. Improving distribution for the long tail boosts perceived value and retention.</p>
+          </div>
+          <div class="card highlight">
+            <div class="stat">50% <small>of listings get 92% of DPVs</small></div>
+            <p>Small shifts toward more balanced exposure can meaningfully lift outcomes for overlooked inventory.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Performance</p>
+        <div>
+          <h1>Strong Results After Launch</h1>
+          <h2>Early data points to significant uplift</h2>
+        </div>
+        <div class="grid-three">
+          <div class="card highlight">
+            <div class="stat">3x</div>
+            <p>Overall perceived uplift for 01-Aug cohort.</p>
+          </div>
+          <div class="card light">
+            <div class="stat">1.9x</div>
+            <p>Measured in AB test for target.</p>
+          </div>
+          <div class="card">
+            <div class="stat" style="color: #fefefe;">1.5x</div>
+            <p>Lead uplift for T40 compared to baseline.</p>
+          </div>
+        </div>
+        <p style="color: var(--muted); margin-top: 1rem; max-width: 720px;">Outperformance is likely due to carefully designed target lists and strong focus from sales teams. Early customers are getting a great experience, and we expect higher penetration as we work down the target list.</p>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Product</p>
+        <div>
+          <h1>MIA T40 vs MIA T50</h1>
+          <h2>Different surfaces, same goal: more qualified leads</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card light">
+            <h3>MIA T40</h3>
+            <ul>
+              <li>Promoted high in search sorted by "Best Results"</li>
+              <li>Custom sorted search and additional surfaces</li>
+              <li>Up to <strong>3x</strong> more leads than basic</li>
+            </ul>
+          </div>
+          <div class="card highlight">
+            <h3>MIA T50</h3>
+            <ul>
+              <li>Promoted high in search sorted by "Best Results"</li>
+              <li>Promoted custom sorted search and other surfaces</li>
+              <li>Up to <strong>5x</strong> more leads than basic</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Approach</p>
+        <div>
+          <h1>Balance Value with Cost</h1>
+        </div>
+        <div class="grid-two">
+          <div class="card light">
+            <h3>Algorithms</h3>
+            <ul>
+              <li>Better MIA selection logic</li>
+              <li>More sophisticated ranking signals</li>
+              <li>Tier blending to protect experience</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Outcome</h3>
+            <ul>
+              <li>Minimize platform cost</li>
+              <li>Capture full value MIA provides</li>
+              <li>Active uplift management with caps</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Clean Slate</p>
+        <div>
+          <h1>Performance vs Spend</h1>
+          <h2>Simple pricing aligned with value</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card highlight">
+            <h3>What if we restart?</h3>
+            <ol>
+              <li>Effortlessly increase performance</li>
+              <li>Simple pricing aligned with value</li>
+              <li>Boost all inventory all the time</li>
+              <li>Full control for dealers as needed</li>
+            </ol>
+          </div>
+          <div class="card light">
+            <h3>Guiding Principle</h3>
+            <p>Performance rises with smart spend. The sweet spot pairs uplift with transparent pricing so dealers know exactly what they gain.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const deck = document.querySelector('.deck');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let index = 0;
+
+    if (deck?.dataset.title) {
+      document.title = deck.dataset.title;
+    }
+
+    const activate = (nextIndex) => {
+      index = Math.max(0, Math.min(nextIndex, slides.length - 1));
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    };
+
+    const goNext = () => activate(index + 1);
+    const goPrev = () => activate(index - 1);
+
+    const handleKey = (event) => {
+      const { key, shiftKey } = event;
+      if (["ArrowRight", "ArrowDown", " "].includes(key)) {
+        event.preventDefault();
+        return shiftKey ? goPrev() : goNext();
+      }
+      if (["ArrowLeft", "ArrowUp"].includes(key)) {
+        event.preventDefault();
+        return goPrev();
+      }
+    };
+
+    const handleClick = (event) => {
+      const { clientX } = event;
+      const midpoint = window.innerWidth / 2;
+      if (clientX >= midpoint) {
+        goNext();
+      } else {
+        goPrev();
+      }
+    };
+
+    let touchStartX = null;
+    const handleTouchStart = (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    };
+
+    const handleTouchEnd = (event) => {
+      if (touchStartX === null) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 30) {
+        delta < 0 ? goNext() : goPrev();
+      }
+      touchStartX = null;
+    };
+
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('click', handleClick);
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+  </script>
+</body>
+</html>

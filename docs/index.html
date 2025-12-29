@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codex Presentation Hub</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #4b5563;
+      --accent: #ffce00;
+      --shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 10% 20%, #fff7d6 0, #fff7d6 10%, transparent 20%),
+                  radial-gradient(circle at 90% 10%, #dbeafe 0, #dbeafe 12%, transparent 24%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 { margin: 0; font-size: 2.6rem; }
+    header p { margin: 0.6rem auto 0; color: var(--muted); max-width: 720px; line-height: 1.6; }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 3rem; display: grid; gap: 1.25rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+
+    .card {
+      background: var(--card);
+      padding: 1.25rem 1.35rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      color: var(--text);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16); }
+
+    .pill { display: inline-block; background: var(--accent); color: #111; padding: 0.35rem 0.7rem; border-radius: 999px; font-wei
+ ght: 800; letter-spacing: 0.02em; text-transform: uppercase; font-size: 0.75rem; }
+
+    h2 { margin: 0.4rem 0; font-size: 1.3rem; }
+    p { margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      background: #0f172a;
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .btn.secondary { background: #f8fafc; color: #0f172a; }
+
+    .list { background: var(--card); padding: 1rem 1.25rem; border-radius: 14px; box-shadow: var(--shadow); }
+    .list ul { margin: 0.2rem 0 0; padding-left: 1.2rem; color: var(--muted); line-height: 1.6; }
+
+    footer { text-align: center; padding: 1.5rem 1.5rem 2.5rem; color: var(--muted); font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="pill">Codex</p>
+    <h1>Presentation Hub</h1>
+    <p>Host single-file presentations for GitHub Pages. Copy the template, drop it in <code>docs/presentations</code>, and link it b
+ elow for quick navigation.</p>
+  </header>
+
+  <main>
+    <section class="grid">
+      <article class="card">
+        <span class="pill">Template</span>
+        <h2>Reusable Presentation Template</h2>
+        <p>Start every new deck from a self-contained HTML scaffold with built-in keyboard, click, and touch navigation.</p>
+        <div class="actions">
+          <a class="btn" href="presentations/template.html">Open Template</a>
+          <a class="btn secondary" href="https://github.com/new" target="_blank" rel="noreferrer">Duplicate Repo</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="pill">Sample</span>
+        <h2>Performance & Roadmap Showcase</h2>
+        <p>Example deck inspired by past slides: roadmap, recommender performance, and product tiers.</p>
+        <div class="actions">
+          <a class="btn" href="presentations/sample-roadmap.html">View Sample Deck</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="list">
+      <h2 style="margin: 0;">How to add a new presentation</h2>
+      <ul>
+        <li>Copy <code>docs/presentations/template.html</code> to a new filename (one file per presentation).</li>
+        <li>Update the <code>data-title</code> attribute on <code>.deck</code> and the pill text in the header.</li>
+        <li>Edit or duplicate <code>&lt;section class="slide"&gt;</code> blocks to build your slides.</li>
+        <li>Add a link to your new file in this index for easy access once GitHub Pages publishes <code>docs/</code>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Deployed automatically by GitHub Pages from the <code>docs</code> directory.
+  </footer>
+</body>
+</html>

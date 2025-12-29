@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codex Presentation Template</title>
+  <style>
+    :root {
+      --bg: #0b1021;
+      --fg: #f7f8fb;
+      --muted: #a0aec0;
+      --accent: #4de1ff;
+      --accent-2: #ff8ad0;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.08);
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .deck {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    main {
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 6vh 8vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.75rem;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(77, 225, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(255, 138, 208, 0.18), transparent 32%),
+        radial-gradient(circle at 45% 80%, rgba(77, 225, 255, 0.08), transparent 40%),
+        var(--bg);
+      transition: opacity 140ms ease-out, transform 140ms ease-out;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(26px);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .slide h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      letter-spacing: -0.02em;
+    }
+
+    .slide h2 {
+      margin: 0.15rem 0 0;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .slide p, .slide ul, .slide ol {
+      margin: 0;
+      color: var(--fg);
+      line-height: 1.7;
+      max-width: 900px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #0b1021;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      width: fit-content;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem 1.35rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(6px);
+    }
+
+    .card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+
+    .card ul, .card ol { color: var(--fg); }
+
+    @media (max-width: 800px) {
+      .slide { padding: 5vh 6vw; }
+      .grid-two { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" data-title="Codex Presentation Template">
+    <main>
+      <!-- Duplicate the slides below to create your presentation. Each
+           <section class="slide"> is a single slide. Update the deck title
+           in the .deck data-title attribute to reflect the presentation name. -->
+
+      <section class="slide active">
+        <p class="pill">Welcome</p>
+        <div>
+          <h1>Title of Your Presentation</h1>
+          <h2>Optional subtitle goes right here</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card">
+            <h3>What this template offers</h3>
+            <ul>
+              <li>Single-file HTML designed to feel like fullscreen slides.</li>
+              <li>Keyboard, click, and touch controls with no on-slide chrome.</li>
+              <li>Clean, atmospheric styling you can iterate over time.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>How to use it</h3>
+            <ol>
+              <li>Copy this file and rename it.</li>
+              <li>Update the title in the <code>data-title</code> attribute.</li>
+              <li>Replace slide content with your own.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Structure</p>
+        <div>
+          <h1>Slide Layout Helpers</h1>
+          <p>Mix headline blocks with grid layouts to balance narrative and detail.</p>
+        </div>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Reusable Classes</h3>
+            <ul>
+              <li><code>.grid-two</code> for two-column layouts.</li>
+              <li><code>.card</code> for contained content blocks.</li>
+              <li><code>.pill</code> for compact labels.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Design Tips</h3>
+            <ul>
+              <li>Use short headlines; keep bullets concise.</li>
+              <li>Blend accent gradients sparingly for emphasis.</li>
+              <li>Keep slides focused on one concept.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="pill">Next Steps</p>
+        <div>
+          <h1>Duplicate & Share</h1>
+          <p>After customizing, link your new file from the GitHub Pages index. Keep slides self-contained by embedding assets alongside each deck.</p>
+        </div>
+        <div class="card">
+          <h3>Navigation</h3>
+          <ul>
+            <li><strong>Keyboard:</strong> ← / →, Space, or Shift+Space</li>
+            <li><strong>Click:</strong> click the left or right half of the slide</li>
+            <li><strong>Touch:</strong> swipe left or right on mobile</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const deck = document.querySelector('.deck');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let index = 0;
+
+    if (deck?.dataset.title) {
+      document.title = deck.dataset.title;
+    }
+
+    const activate = (nextIndex) => {
+      index = Math.max(0, Math.min(nextIndex, slides.length - 1));
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    };
+
+    const goNext = () => activate(index + 1);
+    const goPrev = () => activate(index - 1);
+
+    const handleKey = (event) => {
+      const { key, shiftKey } = event;
+      if (["ArrowRight", "ArrowDown", " "].includes(key)) {
+        event.preventDefault();
+        return shiftKey ? goPrev() : goNext();
+      }
+      if (["ArrowLeft", "ArrowUp"].includes(key)) {
+        event.preventDefault();
+        return goPrev();
+      }
+    };
+
+    const handleClick = (event) => {
+      const { clientX } = event;
+      const midpoint = window.innerWidth / 2;
+      if (clientX >= midpoint) {
+        goNext();
+      } else {
+        goPrev();
+      }
+    };
+
+    let touchStartX = null;
+    const handleTouchStart = (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    };
+
+    const handleTouchEnd = (event) => {
+      if (touchStartX === null) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 30) {
+        delta < 0 ? goNext() : goPrev();
+      }
+      touchStartX = null;
+    };
+
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('click', handleClick);
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+  </script>
+</body>
+</html>
