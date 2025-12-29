@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance & Roadmap Showcase</title>
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --text: #111827;
+      --accent: #ffce00;
+      --muted: #4b5563;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .deck { height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+      padding: 0.85rem 1.5rem;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    header .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    header .progress { flex: 1; height: 6px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
+    header .progress span { display: block; height: 100%; background: var(--accent); width: 0; transition: width 150ms ease-in-out; }
+
+    main { flex: 1; position: relative; overflow: hidden; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 2.6rem 3.2rem;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      margin: 1.4rem auto;
+      width: calc(100% - 3rem);
+      height: calc(100% - 3rem);
+      border-radius: 14px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1.4rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(26px);
+      transition: opacity 140ms ease-out, transform 140ms ease-out;
+    }
+
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .slide h1, .slide h2, .slide h3 { margin: 0; }
+    .slide h1 { font-size: 2.35rem; color: #0f172a; }
+    .slide h2 { font-size: 1.5rem; color: var(--muted); font-weight: 600; }
+
+    .slide p, .slide ul, .slide ol { color: #1f2937; line-height: 1.65; margin: 0; }
+
+    .pill { display: inline-block; background: var(--accent); color: #0f172a; padding: 0.35rem 0.8rem; border-radius: 999px; font-weight: 800; letter-spacing: 0.01em; text-transform: uppercase; font-size: 0.8rem; }
+
+    .grid-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .grid-three { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+    .card { background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: 12px; box-shadow: var(--shadow); }
+    .card.highlight { background: #fef08a; color: #111827; }
+    .card.light { background: #f8fafc; color: #0f172a; }
+
+    .stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .stat small { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.03em; }
+
+    .timeline { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; }
+    .timeline .lane { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 0.75rem; min-height: 160px; display: flex; flex-direction: column; gap: 0.5rem; }
+    .timeline .lane h3 { margin: 0; font-size: 0.95rem; color: #0f172a; text-transform: uppercase; letter-spacing: 0.02em; }
+    .timeline .item { background: #fff7d6; border: 1px solid #facc15; border-radius: 10px; padding: 0.65rem 0.7rem; font-weight: 700; color: #92400e; box-shadow: var(--shadow); }
+
+    footer { padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.9rem; }
+    .hint { display: inline-flex; gap: 0.4rem; align-items: center; padding: 0.35rem 0.75rem; border-radius: 8px; background: #e2e8f0; color: #0f172a; font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .slide { padding: 1.5rem; width: calc(100% - 2rem); height: calc(100% - 2rem); }
+      .slide h1 { font-size: 1.9rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      header .progress { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" data-title="Performance & Roadmap Showcase">
+    <header>
+      <div class="meta">
+        <span class="pill">Showcase</span>
+        <span class="title">Performance & Roadmap Showcase</span>
+      </div>
+      <div class="progress" aria-hidden="true"><span></span></div>
+      <div class="meta">Use ← / → or Space / Shift+Space</div>
+    </header>
+
+    <main>
+      <section class="slide active">
+        <div>
+          <p class="pill">Long-term View</p>
+          <h1>Long-term Roadmap</h1>
+          <h2>Lead magnet, MIA upgrades, and efficiency milestones</h2>
+        </div>
+        <div class="timeline">
+          <div class="lane">
+            <h3>H1 2023</h3>
+            <div class="item">Major surfaces scaled</div>
+          </div>
+          <div class="lane">
+            <h3>H2 2023</h3>
+            <div class="item">Relevance & revenue optimization</div>
+            <div class="item">More surfaces scaled</div>
+          </div>
+          <div class="lane">
+            <h3>H1 2024</h3>
+            <div class="item">MIA T50 implementations</div>
+            <div class="item">Target list tooling</div>
+          </div>
+          <div class="lane">
+            <h3>H2 2024</h3>
+            <div class="item">Launch T50 in DE, BE, IT</div>
+            <div class="item">Launch T30 in AT, NL</div>
+          </div>
+          <div class="lane">
+            <h3>H1 2025</h3>
+            <div class="item">Online uplift management caps</div>
+            <div class="item">CPC product for Lemons*</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div>
+          <p class="pill">Lead Driver</p>
+          <h1>The Recommender</h1>
+          <h2>Embedded across surfaces to drive incremental leads</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card light">
+            <h3>Coverage</h3>
+            <ul>
+              <li>List page modules</li>
+              <li>Detail pages and apps</li>
+              <li>Email CRM and lead confirmations</li>
+            </ul>
+          </div>
+          <div class="card highlight">
+            <div class="stat">~20% <small>of leads</small></div>
+            <p>The recommender powers roughly a fifth of all leads across key surfaces, making it a critical lever for distribution.</p>
+          </div>
+        </div>
+        <p style="color: var(--muted); margin-top: 1rem;">* Data taken from Google Analytics Web for June 2021</p>
+      </section>
+
+      <section class="slide">
+        <div>
+          <p class="pill">Distribution</p>
+          <h1>Focus on the Tail</h1>
+          <h2>Even coverage increases perceived fairness and value</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Opportunity</h3>
+            <p>Listings with few views feel invisible. Improving distribution for the long tail boosts perceived value and retention.</p>
+          </div>
+          <div class="card highlight">
+            <div class="stat">50% <small>of listings get 92% of DPVs</small></div>
+            <p>Small shifts toward more balanced exposure can meaningfully lift outcomes for overlooked inventory.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div>
+          <p class="pill">Performance</p>
+          <h1>Strong Results After Launch</h1>
+          <h2>Early data points to significant uplift</h2>
+        </div>
+        <div class="grid-three">
+          <div class="card highlight">
+            <div class="stat">3x</div>
+            <p>Overall perceived uplift for 01-Aug cohort.</p>
+          </div>
+          <div class="card light">
+            <div class="stat">1.9x</div>
+            <p>Measured in AB test for target.</p>
+          </div>
+          <div class="card">
+            <div class="stat" style="color: #f8fafc;">1.5x</div>
+            <p>Lead uplift for T40 compared to baseline.</p>
+          </div>
+        </div>
+        <p style="color: var(--muted); margin-top: 1rem; max-width: 720px;">Outperformance is likely due to carefully designed target lists and strong focus from sales teams. Early customers are getting a great experience, and we expect higher penetration as we work down the target list.</p>
+      </section>
+
+      <section class="slide">
+        <div>
+          <p class="pill">Product</p>
+          <h1>MIA T40 vs MIA T50</h1>
+          <h2>Different surfaces, same goal: more qualified leads</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card light">
+            <h3>MIA T40</h3>
+            <ul>
+              <li>Promoted high in search sorted by "Best Results"</li>
+              <li>Custom sorted search and additional surfaces</li>
+              <li>Up to <strong>3x</strong> more leads than basic</li>
+            </ul>
+          </div>
+          <div class="card highlight">
+            <h3>MIA T50</h3>
+            <ul>
+              <li>Promoted high in search sorted by "Best Results"</li>
+              <li>Promoted custom sorted search and other surfaces</li>
+              <li>Up to <strong>5x</strong> more leads than basic</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div>
+          <p class="pill">Approach</p>
+          <h1>Balance Value with Cost</h1>
+        </div>
+        <div class="grid-two">
+          <div class="card light">
+            <h3>Algorithms</h3>
+            <ul>
+              <li>Better MIA selection logic</li>
+              <li>More sophisticated ranking signals</li>
+              <li>Tier blending to protect experience</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Outcome</h3>
+            <ul>
+              <li>Minimize platform cost</li>
+              <li>Capture full value MIA provides</li>
+              <li>Active uplift management with caps</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div>
+          <p class="pill">Clean Slate</p>
+          <h1>Performance vs Spend</h1>
+          <h2>Simple pricing aligned with value</h2>
+        </div>
+        <div class="grid-two">
+          <div class="card highlight">
+            <h3>What if we restart?</h3>
+            <ol>
+              <li>Effortlessly increase performance</li>
+              <li>Simple pricing aligned with value</li>
+              <li>Boost all inventory all the time</li>
+              <li>Full control for dealers as needed</li>
+            </ol>
+          </div>
+          <div class="card light">
+            <h3>Guiding Principle</h3>
+            <p>Performance rises with smart spend. The sweet spot pairs uplift with transparent pricing so dealers know exactly what they gain.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="hint">
+        <span>←</span><span>→</span>
+        <span>Navigate</span>
+      </div>
+      <div class="meta">Slide <span class="current">1</span> / <span class="total">7</span></div>
+    </footer>
+  </div>
+
+  <script>
+    const deck = document.querySelector('.deck');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progress = document.querySelector('.progress span');
+    const currentEl = document.querySelector('.current');
+    const totalEl = document.querySelector('.total');
+    const titleEl = document.querySelector('.title');
+
+    let index = 0;
+    totalEl.textContent = slides.length;
+    titleEl.textContent = deck?.dataset.title || titleEl.textContent;
+
+    const activate = (nextIndex) => {
+      index = Math.max(0, Math.min(nextIndex, slides.length - 1));
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      const pct = ((index + 1) / slides.length) * 100;
+      progress.style.width = `${pct}%`;
+      currentEl.textContent = index + 1;
+    };
+
+    const goNext = () => activate(index + 1);
+    const goPrev = () => activate(index - 1);
+
+    const handleKey = (event) => {
+      const { key, shiftKey } = event;
+      if (['ArrowRight', 'ArrowDown', ' '].includes(key)) {
+        event.preventDefault();
+        return shiftKey ? goPrev() : goNext();
+      }
+      if (['ArrowLeft', 'ArrowUp'].includes(key)) {
+        event.preventDefault();
+        return goPrev();
+      }
+    };
+
+    const handleClick = (event) => {
+      const { clientX } = event;
+      const midpoint = window.innerWidth / 2;
+      if (clientX >= midpoint) {
+        goNext();
+      } else {
+        goPrev();
+      }
+    };
+
+    let touchStartX = null;
+    const handleTouchStart = (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    };
+
+    const handleTouchEnd = (event) => {
+      if (touchStartX === null) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 30) {
+        delta < 0 ? goNext() : goPrev();
+      }
+      touchStartX = null;
+    };
+
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('click', handleClick);
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+  </script>
+</body>
+</html>
